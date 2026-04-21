@@ -184,3 +184,7 @@ setup-chha.sh
 8. flush cache/permalinks
         ↓
 FULL SITE READY
+
+git clone https://github.com/mails2sasipriya/cawp.git chha
+
+Advanced Custom Fields

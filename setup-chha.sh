@@ -4,10 +4,10 @@ set -e
 echo "🚀 Starting CHHA setup..."
 
 # -----------------------------
-# WP-CLI CONFIG
+# CONFIG
 # -----------------------------
 WP="php /c/wp-cli/wp-cli.phar"
-WP_PATH="/c/xampp/htdocs/wordpress-test"
+WP_PATH="/c/xampp/htdocs/wptest"
 THEME_PATH="$WP_PATH/wp-content/themes/chha"
 
 run_wp() {
@@ -32,31 +32,31 @@ run_wp rewrite structure "/%postname%/" --hard
 run_wp rewrite flush --hard
 
 # -----------------------------
-# THEME ACTIVATION
+# THEME
 # -----------------------------
 echo "Activating theme..."
 
 run_wp theme activate chha || true
 
 # -----------------------------
-# ACF INSTALL (SAFE + REAL CHECK)
+# ACF STATUS CHECK (NO DB IMPORT)
 # -----------------------------
-echo "Installing Advanced Custom Fields..."
+echo "Checking ACF + loading JSON..."
 
-if run_wp plugin is-installed advanced-custom-fields >/dev/null 2>&1; then
-  echo "✔ ACF already installed"
-else
-  if run_wp plugin install advanced-custom-fields --activate; then
-    echo "✔ ACF installed and activated"
-  else
-    echo "⚠️ ACF install failed (likely SSL/cURL issue on XAMPP)"
-    echo "➡️ Fix SSL cert in php.ini to enable plugin downloads"
-  fi
-fi
+run_wp eval '
+if (function_exists("acf_get_field_groups")) {
+    acf_get_field_groups();
+    echo "✔ ACF JSON loaded\n";
+} else {
+    echo "⚠ ACF not active\n";
+}
+'
 
 # -----------------------------
-# MENU HELPERS
+# MENUS
 # -----------------------------
+echo "Creating menus..."
+
 menu_exists() {
   run_wp menu list --fields=name 2>/dev/null | grep -Fxq "$1"
 }
@@ -72,11 +72,6 @@ create_menu() {
   fi
 }
 
-# -----------------------------
-# MENUS
-# -----------------------------
-echo "Creating menus..."
-
 create_menu "Main Menu"
 create_menu "Footer Menu"
 create_menu "Social Menu"
@@ -85,7 +80,7 @@ create_menu "Footer Column 2"
 create_menu "Footer Column 3"
 
 # -----------------------------
-# THEME BUILD
+# BUILD ASSETS
 # -----------------------------
 echo "Building theme assets..."
 

@@ -1,12 +1,5 @@
+
 <?php
-
-/**
- * Safe ACF wrapper (prevents fatal error if plugin missing)
- */
-function chha_field($key) {
-    return function_exists('get_field') ? get_field($key) : null;
-}
-
 $variant = chha_field('hero_variant') ?: 'image';
 
 $title       = chha_field('hero_title') ?: get_bloginfo('name');
@@ -23,7 +16,6 @@ $show_bear   = chha_field('hero_static_asset_toggle');
 
 <?php if ($variant === 'background' && $bg_image): ?>
 
-<!-- BACKGROUND HERO -->
 <div class="header-primary-banner hidden-print"
      style="background-image:url('<?php echo esc_url($bg_image['url']); ?>');
             background-size:cover;
@@ -33,10 +25,10 @@ $show_bear   = chha_field('hero_static_asset_toggle');
     <div class="row my-4">
       <div class="col my-auto text-white">
 
-        <h1 class="font-weight-600"><?php echo esc_html($title); ?></h1>
+        <h1><?php echo esc_html($title); ?></h1>
 
         <?php if ($description): ?>
-          <div class="lead m-b-lg"><?php echo esc_html($description); ?></div>
+          <div class="lead"><?php echo esc_html($description); ?></div>
         <?php endif; ?>
 
         <?php if ($btn_text): ?>
@@ -53,15 +45,14 @@ $show_bear   = chha_field('hero_static_asset_toggle');
 
 <?php elseif ($variant === 'video' && $video): ?>
 
-<!-- VIDEO HERO -->
 <div class="header-primary-banner hidden-print">
 
   <div class="container">
     <div class="row my-4">
 
       <div class="col-md-6 my-auto">
-        <h1 class="color-white"><?php echo esc_html($title); ?></h1>
-        <p class="color-white"><?php echo esc_html($description); ?></p>
+        <h1><?php echo esc_html($title); ?></h1>
+        <p><?php echo esc_html($description); ?></p>
       </div>
 
       <div class="col-md-6">
@@ -78,7 +69,6 @@ $show_bear   = chha_field('hero_static_asset_toggle');
 
 <?php else: ?>
 
-<!-- DEFAULT HERO -->
 <div class="header-primary-banner hidden-print">
 
   <div class="container">
@@ -86,10 +76,10 @@ $show_bear   = chha_field('hero_static_asset_toggle');
 
       <div class="col my-auto">
 
-        <h1 class="color-white"><?php echo esc_html($title); ?></h1>
+        <h1><?php echo esc_html($title); ?></h1>
 
         <?php if ($description): ?>
-          <div class="color-white lead">
+          <div class="lead">
             <?php echo esc_html($description); ?>
           </div>
         <?php endif; ?>
