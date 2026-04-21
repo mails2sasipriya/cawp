@@ -1,0 +1,50 @@
+# =========================
+# WordPress core (ONLY if repo is at WP root)
+# =========================
+wp-admin/
+wp-includes/
+wp-content/plugins/
+wp-content/upgrade/
+
+# Core PHP files (WP root only safety)
+wp-*.php
+index.php
+xmlrpc.php
+license.txt
+readme.html
+
+# Config (never commit secrets)
+wp-config.php
+
+# =========================
+# Node (theme build system)
+# =========================
+node_modules/
+package-lock.json
+
+# =========================
+# Uploads (always ignore)
+# =========================
+wp-content/uploads/
+
+# =========================
+# Theme generated assets
+# =========================
+wp-content/themes/chha/assets/
+
+# =========================
+# Logs
+# =========================
+*.log
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# IDE / Editor
+# =========================
+.vscode/
+.idea/

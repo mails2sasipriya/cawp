@@ -1,0 +1,13 @@
+{
+  "name": "chha-theme",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "setup": "bash setup-chha.sh",
+    "build": "node copy-assets.js"
+  },
+  "dependencies": {
+    "@cagovweb/state-template": "^6.5.5",
+    "fs-extra": "^11.3.4"
+  }
+}

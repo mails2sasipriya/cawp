@@ -1,0 +1,182 @@
+convert a full CA homepage layout into WordPress template
+make dropdown menus CA-style (multi-level working)
+add sticky header scroll behavior
+fix mobile slide navigation exactly like ca.gov
+
+<header> (global)
+<main> (page content)
+<footer>
+   site footer (your links)
+   statewide footer (CA links)
+</footer>
+
+This is not optional — it’s the standard layout pattern
+
+convert this footer into a block theme footer template part
+or make it match CA template pixel-perfect spacing + typography system
+or fix header next so full theme becomes “official template level”
+
+Multiple hero variants
+with image
+without image
+full-width background
+video hero
+🔥 Or make it selectable in admin
+
+Convert your hero into a full ACF block (production-ready)
+
+reorganize your entire theme into a clean CA-grade architecture
+wp_enqueue_style('cagov-core', ...);
+wp_enqueue_style('cagov-theme', ...);
+
+wp_enqueue_style('chha-base', ...);
+wp_enqueue_style('chha-components', ...);
+wp_enqueue_style('chha-overrides', ...);
+
+npm install CA system
+        ↓
+copy-assets.js (build step)
+        ↓
+/assets (flat folder)
+        ↓
+WordPress loads CA CSS/JS
+        ↓
+chha.custom.css overrides everything
+
+automatic “dev mode vs production mode” asset switching
+“one command setup” (npm run dev + local WP sync)
+
+You now have:
+
+C:\xampp\htdocs\wordpress\            ← WordPress root
+│
+├── wp-content/
+│   └── themes/
+│       └── chha/                     ← your theme
+│           ├── assets/               ← output goes here
+│           ├── copy-assets.js
+│           ├── functions.php
+│
+└── node_modules/                     ← npm lives here (root level)
+
+That’s a clean separation of concerns:
+
+WordPress = runtime
+npm = build system
+theme = output target only
+
+npm run build
+
+👉 This executes:
+
+copy-assets.js
+copies CA files into /assets/css, /assets/js, /assets/fonts
+
+Enqueue in the correct order (very important)
+
+In functions.php:
+
+wp_enqueue_style('cagov-core', get_template_directory_uri() . '/assets/css/cagov.core.min.css');
+wp_enqueue_style('cagov-theme', get_template_directory_uri() . '/assets/css/colortheme-oceanside.css');
+wp_enqueue_style('cagov-homepage', get_template_directory_uri() . '/assets/css/homepage.css');
+wp_enqueue_style('cagov-custom', get_template_directory_uri() . '/assets/css/custom.css');
+wp_enqueue_style('chha-custom', get_template_directory_uri() . '/assets/css/chha.custom
+
+
+
+Convert CA components into WP parts
+accordion
+cards
+alerts
+feature blocks
+2. Make it editable for non-technical users
+ACF or block editor integration
+3. Add real CA behaviors
+dropdown nav (multi-level)
+sticky header scroll behavior
+mobile slide-out menu refinement
+
+make dropdown nav (like CA expandable menus)
+build homepage blocks (cards, accordions, hero)
+convert CA components → reusable WP blocks (ACF or Gutenberg)
+
+verify your npm build (to avoid missing assets forever)
+automate asset sync (so fonts never break again)
+clean production-ready build pipeline
+
+
+error
+
+warning: in the working copy of 'wp-includes/post-template.php', LF
+git config --global core.autocrlf true
+
+I’m building a custom WordPress theme called **CHHA** based on the California State Web Template (CA Gov design system). I’ve already done the following:
+
+* Set up a custom theme (`wp-content/themes/chha`)
+* Enqueued CA Gov core styles (`cagov.core.min.css`, `colortheme-oceanside.css`)
+* Added `custom.css` and `homepage.css`
+* Built a dynamic header and footer using `wp_nav_menu`
+* Created 3 dynamic footer columns + a global footer
+* Fixed issues with:
+
+For node module issue
+ rm -rf node_modules
+npm cache clean --force
+npm install
+
+
+What you SHOULD NOT commit (important)
+node_modules/
+wp-admin/
+wp-includes/
+wp-content/uploads/
+wp-content/plugins/
+wp-content/upgrade/
+wp-config.php
+package-lock.json   (optional but recommended NOT to commit for WP theme repo)
+.htaccess
+index.php (root WP core file)
+wp-*.php files
+
+What you SHOULD commit (correct CHHA structure)
+
+Your repo should look like a starter theme + config system:
+/chha-theme-repo
+  /wp-content/themes/chha/
+      style.css
+      functions.php
+      header.php
+      footer.php
+      /assets/
+      /template-parts/
+      copy-assets.js
+
+  /config/
+      menus.json
+      nav_menu_locations.json
+      theme_mods_chha.json
+      widget-options.json
+      site-name.json
+      site-tagline.json
+      sidebars_widgets.json
+
+  package.json
+  .gitignore
+  .gitattributes
+  README.md
+
+  cached file
+  git rm -r --cached wp-content/themes/chha/assets
+
+  Goal: “Zero manual WP setup mode”
+
+  zero-setup bootstrap
+./bootstrap.sh
+
+That will:
+
+install WordPress (if missing)
+create DB
+run this setup
+import your config JSON
+fully recreate site in one command
