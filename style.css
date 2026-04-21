@@ -1,0 +1,30 @@
+/*
+Theme Name: Chha
+Version: 1.0
+*/
+
+/* =========================
+THEME OVERRIDES ONLY
+========================= */
+
+/* Remove bullets ONLY for WP menus */
+.site-footer .menu,
+.site-footer .menu li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Ensure links match state styling */
+.site-footer .menu a {
+    display: block;
+    margin: 10px 0;
+}
+
+
+/* Bear fix */
+.hero-bear,
+img[src*="header-bear.svg"] {
+    transform: scaleX(-1);
+    display: inline-block;
+}
