@@ -6,8 +6,8 @@ echo "🚀 Starting CHHA setup..."
 # -----------------------------
 # CONFIG
 # -----------------------------
-WP="php /c/wp-cli/wp-cli.phar"
-WP_PATH="/c/xampp/htdocs/wptest"
+WP="/c/tools/scripts/wp"
+WP_PATH="/c/tools/nginx/html/wordpress"
 THEME_PATH="$WP_PATH/wp-content/themes/chha"
 
 run_wp() {

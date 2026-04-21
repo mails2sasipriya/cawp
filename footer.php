@@ -10,48 +10,51 @@ SITE FOOTER (3 COLUMN)
 
       <!-- COLUMN 1 -->
       <div class="col-md-4">
-        <div class="h4 w-100 brd-bottom brd-highlight p-b">CHHA</div>
+        <div class="h4 w-100 brd-bottom brd-highlight p-b">Our Department</div>
 
         <?php
         wp_nav_menu([
-          'theme_location' => 'footer-menu-1',
+          'theme_location' => 'footer_col_1',   // FIXED
           'container'      => false,
           'items_wrap'     => '%3$s',
           'depth'          => 1,
           'link_before'    => '<span class="d-block no-underline m-y font-size-16 text-white color-highlight-hover underline-hover">',
           'link_after'     => '</span>',
+          'fallback_cb'    => '__return_empty_string', // PREVENT PAGE LIST
         ]);
         ?>
       </div>
 
       <!-- COLUMN 2 -->
       <div class="col-md-4">
-        <div class="h4 w-100 brd-bottom brd-highlight p-b">Resources</div>
+        <div class="h4 w-100 brd-bottom brd-highlight p-b">State Campaigns</div>
 
         <?php
         wp_nav_menu([
-          'theme_location' => 'footer-menu-2',
+          'theme_location' => 'footer_col_2',   // FIXED
           'container'      => false,
           'items_wrap'     => '%3$s',
           'depth'          => 1,
           'link_before'    => '<span class="d-block no-underline m-y font-size-16 text-white color-highlight-hover underline-hover">',
           'link_after'     => '</span>',
+          'fallback_cb'    => '__return_empty_string', // PREVENT PAGE LIST
         ]);
         ?>
       </div>
 
       <!-- COLUMN 3 -->
       <div class="col-md-4">
-        <div class="h4 w-100 brd-bottom brd-highlight p-b">Related websites</div>
+        <div class="h4 w-100 brd-bottom brd-highlight p-b">Communities</div>
 
         <?php
         wp_nav_menu([
-          'theme_location' => 'footer-menu-3',
+          'theme_location' => 'footer_col_3',   // FIXED
           'container'      => false,
           'items_wrap'     => '%3$s',
           'depth'          => 1,
           'link_before'    => '<span class="d-block no-underline m-y font-size-16 text-white color-highlight-hover underline-hover">',
           'link_after'     => '</span>',
+          'fallback_cb'    => '__return_empty_string', // PREVENT PAGE LIST
         ]);
         ?>
       </div>

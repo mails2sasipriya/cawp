@@ -4,9 +4,9 @@ set -e
 # --------------------------------------------------
 # Paths (Windows-safe)
 # --------------------------------------------------
-PHP="/c/xampp/php/php.exe"
-WP="/c/wp-cli/wp-cli.phar"
-WP_PATH="/c/xampp/htdocs/wordpress"
+PHP="/c/tools/php/php.exe"
+WP="/c/tools/scripts/wp"
+WP_PATH="/c/tools/nginx/html/wordpress"
 
 CONFIG_DIR="config"
 mkdir -p "$CONFIG_DIR"

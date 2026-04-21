@@ -76,10 +76,10 @@ $show_bear   = chha_field('hero_static_asset_toggle');
 
       <div class="col my-auto">
 
-        <h1><?php echo esc_html($title); ?></h1>
+        <h1 class="color-white font-weight-600"><?php echo esc_html($title); ?></h1>
 
         <?php if ($description): ?>
-          <div class="lead">
+          <div class="color-white lead m-b-lg line-height-1-6em" style="max-width:22em;">
             <?php echo esc_html($description); ?>
           </div>
         <?php endif; ?>

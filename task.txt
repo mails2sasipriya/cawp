@@ -188,3 +188,13 @@ FULL SITE READY
 git clone https://github.com/mails2sasipriya/cawp.git chha
 
 Advanced Custom Fields
+
+cd /c/tools/scripts
+curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+mv wp-cli.phar wp
+chmod +x wp
+nano ~/.bashrc
+export PATH="$PATH:/c/tools/scripts"
+alias wp="/c/tools/scripts/wp"
+source ~/.bashrc
+wp --info

@@ -35,7 +35,7 @@ UTILITY HEADER
       </div>
 
       <div class="settings-links">
-        <span>Web Template v6.5.5</span>
+        <span></span>
       </div>
 
     </div>
