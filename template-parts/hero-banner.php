@@ -1,16 +1,24 @@
 <?php
-$variant = get_field('hero_variant') ?: 'image';
 
-$title       = get_field('hero_title') ?: get_bloginfo('name');
-$description = get_field('hero_description');
-$btn_text    = get_field('hero_button_text');
-$btn_link    = get_field('hero_button_link');
+/**
+ * Safe ACF wrapper (prevents fatal error if plugin missing)
+ */
+function chha_field($key) {
+    return function_exists('get_field') ? get_field($key) : null;
+}
 
-$image       = get_field('hero_image');
-$bg_image    = get_field('hero_bg_image');
-$video       = get_field('hero_video_url');
+$variant = chha_field('hero_variant') ?: 'image';
 
-$show_bear   = get_field('hero_static_asset_toggle');
+$title       = chha_field('hero_title') ?: get_bloginfo('name');
+$description = chha_field('hero_description');
+$btn_text    = chha_field('hero_button_text');
+$btn_link    = chha_field('hero_button_link');
+
+$image       = chha_field('hero_image');
+$bg_image    = chha_field('hero_bg_image');
+$video       = chha_field('hero_video_url');
+
+$show_bear   = chha_field('hero_static_asset_toggle');
 ?>
 
 <?php if ($variant === 'background' && $bg_image): ?>
@@ -68,46 +76,14 @@ $show_bear   = get_field('hero_static_asset_toggle');
 
 </div>
 
-<?php elseif ($variant === 'simple'): ?>
-
-<!-- SIMPLE HERO -->
-<div class="header-primary-banner hidden-print">
-
-  <div class="container">
-    <div class="row my-4">
-
-      <div class="col my-auto">
-
-        <h1 class="color-white"><?php echo esc_html($title); ?></h1>
-
-        <?php if ($description): ?>
-          <div class="color-white lead">
-            <?php echo esc_html($description); ?>
-          </div>
-        <?php endif; ?>
-
-        <?php if ($btn_text): ?>
-          <a href="<?php echo esc_url($btn_link); ?>" class="btn btn-primary">
-            <?php echo esc_html($btn_text); ?>
-          </a>
-        <?php endif; ?>
-
-      </div>
-
-    </div>
-  </div>
-
-</div>
-
 <?php else: ?>
 
-<!-- IMAGE HERO (DEFAULT + CA BEAR TOGGLE) -->
+<!-- DEFAULT HERO -->
 <div class="header-primary-banner hidden-print">
 
   <div class="container">
     <div class="row my-4">
 
-      <!-- LEFT -->
       <div class="col my-auto">
 
         <h1 class="color-white"><?php echo esc_html($title); ?></h1>
@@ -126,23 +102,18 @@ $show_bear   = get_field('hero_static_asset_toggle');
 
       </div>
 
-      <!-- RIGHT -->
       <div class="col my-auto">
 
         <?php if ($show_bear): ?>
 
-          <!-- CA STATIC BEAR -->
           <img
             src="<?php echo get_template_directory_uri(); ?>/assets/images/header-bear.svg"
             alt="California bear"
-            class="py-3 hero-illustration"
             width="100%"
-            style="aspect-ratio:1146/827"
           />
 
         <?php elseif ($image): ?>
 
-          <!-- ADMIN IMAGE -->
           <img
             src="<?php echo esc_url($image['url']); ?>"
             alt="<?php echo esc_attr($image['alt']); ?>"

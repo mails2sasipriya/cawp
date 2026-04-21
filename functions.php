@@ -13,34 +13,36 @@ function chha_setup() {
         'footer_col_3'  => 'Footer Column 3',
     ]);
 }
-add_action('after_setup_theme', 'chha_setup');
+add_action('after_setup_theme', 'chha_setup', 0);
 
+/**
+ * CRITICAL FIX:
+ * Ensure menu locations exist during WP-CLI execution
+ */
+if (defined('WP_CLI') && WP_CLI) {
+    add_action('init', function () {
+        chha_setup();
+    });
+}
 
 function chha_assets() {
 
     $base = get_template_directory_uri() . '/assets/css';
 
-    // 1. Core framework
-    wp_enqueue_style(
-        'cagov-core',
-        $base . '/cagov.core.min.css'
-    );
+    wp_enqueue_style('cagov-core', $base . '/cagov.core.min.css');
 
-    // 2. Theme layer
     wp_enqueue_style(
         'cagov-theme',
         $base . '/colortheme-oceanside.css',
         ['cagov-core']
     );
 
-    // 3. State base custom styles
     wp_enqueue_style(
         'cagov-custom',
         $base . '/custom.css',
         ['cagov-theme']
     );
 
-    // 4. Homepage styles (only front page)
     if (is_front_page()) {
         wp_enqueue_style(
             'cagov-homepage',
@@ -49,7 +51,6 @@ function chha_assets() {
         );
     }
 
-    // 5. FINAL override layer (your theme)
     $deps = is_front_page() ? ['cagov-homepage'] : ['cagov-custom'];
 
     wp_enqueue_style(
@@ -59,7 +60,6 @@ function chha_assets() {
         filemtime(get_stylesheet_directory() . '/style.css')
     );
 
-    // Script
     wp_enqueue_script(
         'cagov-core-js',
         get_template_directory_uri() . '/assets/js/cagov.core.js',
@@ -68,9 +68,7 @@ function chha_assets() {
         true
     );
 }
-
 add_action('wp_enqueue_scripts', 'chha_assets');
-
 
 function chha_menu_css_class($classes, $item, $args) {
     if ($args->theme_location === 'primary') {
@@ -80,7 +78,6 @@ function chha_menu_css_class($classes, $item, $args) {
 }
 add_filter('nav_menu_css_class', 'chha_menu_css_class', 10, 3);
 
-
 function chha_menu_link_class($atts, $item, $args) {
     if ($args->theme_location === 'primary') {
         $atts['class'] = 'first-level-link';
@@ -89,11 +86,23 @@ function chha_menu_link_class($atts, $item, $args) {
 }
 add_filter('nav_menu_link_attributes', 'chha_menu_link_class', 10, 3);
 
-
-/* Allow SVG uploads */
 add_filter('upload_mimes', function($mimes) {
     $mimes['svg'] = 'image/svg+xml';
     return $mimes;
 });
 
 require get_template_directory() . '/inc/config-loader.php';
+
+if (function_exists('acf_add_options_page') || function_exists('acf_get_setting')) {
+
+    // Save ACF JSON into theme folder
+    add_filter('acf/settings/save_json', function () {
+        return get_template_directory() . '/acf-json';
+    });
+
+    // Load ACF JSON from theme folder
+    add_filter('acf/settings/load_json', function ($paths) {
+        $paths[] = get_template_directory() . '/acf-json';
+        return $paths;
+    });
+}

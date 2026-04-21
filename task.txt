@@ -170,13 +170,17 @@ Your repo should look like a starter theme + config system:
 
   Goal: “Zero manual WP setup mode”
 
-  zero-setup bootstrap
-./bootstrap.sh
-
-That will:
-
-install WordPress (if missing)
-create DB
-run this setup
-import your config JSON
-fully recreate site in one command
+WordPress (already installed)
+        ↓
+setup-chha.sh
+        ↓
+1. verify environment
+2. install plugins (ACF etc)
+3. sync theme from git
+4. npm install + build
+5. import config JSON
+6. create menus/pages/options
+7. activate theme
+8. flush cache/permalinks
+        ↓
+FULL SITE READY
