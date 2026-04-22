@@ -3,16 +3,98 @@
 <?php get_template_part('template-parts/hero-banner'); ?>
 
 <!-- PAGE CONTENT -->
-<section class="section">
- 
+<div class="container">
+
+  <div class="row mt-5">
     <?php
-    if (have_posts()) :
-      while (have_posts()) : the_post();
+    if (have_posts()):
+      while (have_posts()):
+        the_post();
         the_content();
       endwhile;
     endif;
     ?>
-  
-</section>
+  </div>
+</div>
+
+<div class="container">
+  <h2 class="p-t-1 p-b-3">What's new?</h2>
+  <div class="row">
+    <div class="col-md-4 m-b-md p-3 outline-1-gray-200-hover">
+      <div class="h-100 bg-gray-100 bg-gray-50-hover pos-rel">
+        <div class="bg-primary-secondary-gradient p-a d-flex justify-content-center align-items-center">
+          <img class="p-4" height="155px" src="<?php echo get_template_directory_uri(); ?>/assets/images/pattern-icon.svg" style="aspect-ratio: 1" alt="">
+        </div>
+
+        <div class="p-a-md">
+          <h3 class="h4 m-t-0 m-b-sm">
+            <a class="color-gray-dark text-decoration-none link-before" href="/patterns.html"
+              aria-label="Content patterns">
+              Patterns
+            </a>
+          </h3>
+          <p>
+            Content patterns are now available! This design solution will help
+            your visitors complete their tasks.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 m-b-md p-3 outline-1-gray-200-hover">
+      <div class="h-100 bg-gray-100 bg-gray-50-hover pos-rel">
+        <div class="bg-primary-secondary-gradient p-a d-flex justify-content-center align-items-center">
+          <img class="p-4" height="155px" src="<?php echo get_template_directory_uri(); ?>/assets/images/nav-icon.svg" style="aspect-ratio: 1" alt="">
+        </div>
+
+        <div class="p-a-md">
+          <h3 class="h4 m-t-0 m-b-sm">
+            <a class="color-gray-dark text-decoration-none link-before" href="/structure/site-navigation.html"
+              aria-label="Enhanced navigation">
+              Enhanced navigation
+            </a>
+          </h3>
+          <p>
+            Better wayfinding and new side navigation makes developing
+            user-friendly websites easier than ever.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 m-b-md p-3 outline-1-gray-200-hover">
+      <div class="h-100 bg-gray-100  bg-gray-50-hover pos-rel">
+        <div class="bg-primary-secondary-gradient p-a d-flex justify-content-center align-items-center">
+          <img class="p-4" height="155px" src="<?php echo get_template_directory_uri(); ?>/assets/images/refreshed-icon.svg" style="aspect-ratio: 1" alt="">
+        </div>
+        <div class="p-a-md">
+          <h3 class="h4 m-t-0 m-b-sm">
+            <a class="color-gray-dark text-decoration-none link-before" href="/visual-design/typography.html"
+              aria-label="Refreshed visual design">
+              Refreshed visual design
+            </a>
+          </h3>
+          <p>
+            We've enhanced our typography with the Public Sans font family.
+            Strengthen your department's brand and content with this strong,
+            neutral typeface.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="link-action m-b-md">
+    <span class="d-flex flex-center lh-1">
+      <svg class="m-r-sm height-20" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 23">
+        <path d="m19 22.1-1.1-1 8.8-8.8H0v-1.6h26.7L17.9 2 19 1l10.6 10.6L19 22.1Z" fill="#046B99"></path>
+      </svg>
+      <span>
+        Visit
+        <a href="/whats-new.html">What's new</a>
+        for more detail on V6 template and website updates.
+      </span>
+    </span>
+  </p>
+</div>
 
 <?php get_footer(); ?>

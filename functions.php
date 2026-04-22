@@ -31,6 +31,7 @@ if (defined('WP_CLI') && WP_CLI) {
 function chha_assets() {
 
     $base = get_template_directory_uri() . '/assets/css';
+    $custom_base = get_template_directory_uri() . '/src/css';
 
     wp_enqueue_style('cagov-core', $base . '/cagov.core.min.css');
 
@@ -42,14 +43,14 @@ function chha_assets() {
 
     wp_enqueue_style(
         'cagov-custom',
-        $base . '/custom.css',
+        $custom_base . '/custom.css',
         ['cagov-theme']
     );
 
     if (is_front_page()) {
         wp_enqueue_style(
             'cagov-homepage',
-            $base . '/homepage.css',
+            $custom_base . '/homepage.css',
             ['cagov-custom']
         );
     }

@@ -131,6 +131,6 @@ NAV + SEARCH
 <!-- =========================
 CONTENT WRAPPER
 ========================= -->
-<div id="main-content">
+<div id="main-content" class="main-content">
 
-<main>
+<main class="main-primary" id="main">

@@ -28,3 +28,15 @@ img[src*="header-bear.svg"] {
     transform: scaleX(-1);
     display: inline-block;
 }
+
+/* Remove bullets on footer column lists produced by wp_nav_menu */
+.section-standout.site-footer li {
+  list-style: none;        /* removes bullets */
+  margin: 0;
+  padding: 0;
+}
+
+/* Extra safety for modern browsers: remove list marker explicitly */
+.section-standout.site-footer li::marker {
+  content: '';
+}

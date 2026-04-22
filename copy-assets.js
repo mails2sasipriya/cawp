@@ -6,8 +6,10 @@ const root = __dirname;
 // CA template source
 const caSrc = path.join(root, "node_modules/@cagovweb/state-template/dist");
 
-// Your custom source (IMPORTANT ADDITION)
+// Your custom source
 const customSrc = path.join(root, "src/images");
+// Your custom source
+const customStyle = path.join(root, "src/css");
 
 // Output
 const dest = path.join(root, "assets");
@@ -38,6 +40,17 @@ async function build() {
       await fs.copy(customSrc, dest + "/images", { overwrite: true });
     } else {
       console.log("No custom src/images folder found");
+    }
+
+
+// -----------------------------
+    // 3. Copy YOUR custom styles
+    // -----------------------------
+    if (fs.existsSync(customStyle)) {
+      console.log("Copying custom styles from src/css → assets/css...");
+      await fs.copy(customStyle, dest + "/css", { overwrite: true });
+    } else {
+      console.log("No custom src/css folder found");
     }
 
     console.log("✅ Assets copied into /assets");
