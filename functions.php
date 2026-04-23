@@ -1,9 +1,15 @@
 <?php
 
 /**
- * Theme Setup
+ * CORE SYSTEM FILES
  */
 require get_template_directory() . '/inc/blocks.php';
+require get_template_directory() . '/inc/config-loader.php';
+
+
+/**
+ * THEME SETUP
+ */
 function chha_setup() {
 
     add_theme_support('title-tag');
@@ -19,8 +25,9 @@ function chha_setup() {
 }
 add_action('after_setup_theme', 'chha_setup', 0);
 
+
 /**
- * Assets
+ * ASSETS
  */
 function chha_assets() {
 
@@ -64,16 +71,18 @@ function chha_assets() {
 }
 add_action('wp_enqueue_scripts', 'chha_assets');
 
+
 /**
- * SVG support
+ * SVG SUPPORT
  */
 add_filter('upload_mimes', function ($mimes) {
     $mimes['svg'] = 'image/svg+xml';
     return $mimes;
 });
 
+
 /**
- * SAFE ACF helper (kept for compatibility only)
+ * SAFE ACF HELPER
  */
 if (!function_exists('chha_field')) {
     function chha_field($key) {
@@ -81,8 +90,9 @@ if (!function_exists('chha_field')) {
     }
 }
 
+
 /**
- * ACF JSON support (optional)
+ * ACF JSON SUPPORT
  */
 if (function_exists('acf_get_field_groups')) {
 
@@ -96,8 +106,22 @@ if (function_exists('acf_get_field_groups')) {
     });
 }
 
-/**
- * CONFIG LOADER (your system layer)
- */
-require get_template_directory() . '/inc/config-loader.php';
 
+/**
+ * MENU HELPERS (PRIMARY NAV ONLY)
+ */
+function chha_menu_css_class($classes, $item, $args) {
+    if (!empty($args->theme_location) && $args->theme_location === 'primary') {
+        $classes[] = 'nav-item';
+    }
+    return $classes;
+}
+add_filter('nav_menu_css_class', 'chha_menu_css_class', 10, 3);
+
+function chha_menu_link_class($atts, $item, $args) {
+    if (!empty($args->theme_location) && $args->theme_location === 'primary') {
+        $atts['class'] = 'first-level-link';
+    }
+    return $atts;
+}
+add_filter('nav_menu_link_attributes', 'chha_menu_link_class', 10, 3);
