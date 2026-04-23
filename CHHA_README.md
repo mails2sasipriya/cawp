@@ -41,7 +41,7 @@ wp-content/themes/chha/
 │   ├── js/
 │   └── fonts/
 │
-├── template-parts/
+├── template-parts/heo-banner.php
 ├── functions.php
 ├── header.php
 ├── footer.php

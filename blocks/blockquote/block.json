@@ -1,0 +1,21 @@
+{
+  "apiVersion": 2,
+  "name": "chha/blockquote",
+  "title": "CHHA Blockquote",
+  "category": "widgets",
+  "icon": "format-quote",
+  "attributes": {
+    "content": {
+      "type": "string",
+      "default": "Good quotes help to tell a story..."
+    },
+    "author": {
+      "type": "string",
+      "default": "Holly Zuluaga"
+    },
+    "variant": {
+      "type": "string",
+      "default": "graphic"
+    }
+  }
+}

@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "setup": "bash setup-chha.sh",
+    "create-block": "node tools/create-block.js",
     "build": "node copy-assets.js"
   },
   "dependencies": {

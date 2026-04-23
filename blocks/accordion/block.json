@@ -1,0 +1,15 @@
+{
+  "apiVersion": 2,
+  "name": "chha/accordion",
+  "title": "CHHA Accordion",
+  "category": "widgets",
+  "icon": "list-view",
+  "attributes": {
+    "items": {
+      "type": "array",
+      "default": [
+        { "title": "Section 1", "content": "Content 1" }
+      ]
+    }
+  }
+}

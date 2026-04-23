@@ -3,6 +3,7 @@
 /**
  * Theme Setup
  */
+require get_template_directory() . '/inc/blocks.php';
 function chha_setup() {
 
     add_theme_support('title-tag');
@@ -17,13 +18,6 @@ function chha_setup() {
     ]);
 }
 add_action('after_setup_theme', 'chha_setup', 0);
-
-/**
- * WP-CLI safety (ensures menus exist in automation mode)
- */
-if (defined('WP_CLI') && WP_CLI) {
-    add_action('init', 'chha_setup', 0);
-}
 
 /**
  * Assets
@@ -55,13 +49,9 @@ function chha_assets() {
         );
     }
 
-    $deps = is_front_page() ? ['cagov-homepage'] : ['cagov-custom'];
-
     wp_enqueue_style(
         'chha-style',
-        get_stylesheet_uri(),
-        $deps,
-        filemtime(get_stylesheet_directory() . '/style.css')
+        get_stylesheet_uri()
     );
 
     wp_enqueue_script(
@@ -75,25 +65,6 @@ function chha_assets() {
 add_action('wp_enqueue_scripts', 'chha_assets');
 
 /**
- * Menu styling helpers
- */
-function chha_menu_css_class($classes, $item, $args) {
-    if (!empty($args->theme_location) && $args->theme_location === 'primary') {
-        $classes[] = 'nav-item';
-    }
-    return $classes;
-}
-add_filter('nav_menu_css_class', 'chha_menu_css_class', 10, 3);
-
-function chha_menu_link_class($atts, $item, $args) {
-    if (!empty($args->theme_location) && $args->theme_location === 'primary') {
-        $atts['class'] = 'first-level-link';
-    }
-    return $atts;
-}
-add_filter('nav_menu_link_attributes', 'chha_menu_link_class', 10, 3);
-
-/**
  * SVG support
  */
 add_filter('upload_mimes', function ($mimes) {
@@ -102,8 +73,7 @@ add_filter('upload_mimes', function ($mimes) {
 });
 
 /**
- * SAFE ACF HELPER (ONLY DEFINED ONCE)
- * 👉 THIS IS THE FIX FOR YOUR FATAL ERROR
+ * SAFE ACF helper (kept for compatibility only)
  */
 if (!function_exists('chha_field')) {
     function chha_field($key) {
@@ -112,9 +82,9 @@ if (!function_exists('chha_field')) {
 }
 
 /**
- * ACF JSON (CONFIG-DRIVEN SCHEMA)
+ * ACF JSON support (optional)
  */
-if (function_exists('acf_get_field_groups') || function_exists('acf_get_setting')) {
+if (function_exists('acf_get_field_groups')) {
 
     add_filter('acf/settings/save_json', function () {
         return get_template_directory() . '/acf-json';
@@ -127,6 +97,7 @@ if (function_exists('acf_get_field_groups') || function_exists('acf_get_setting'
 }
 
 /**
- * Config loader (your engine layer)
+ * CONFIG LOADER (your system layer)
  */
 require get_template_directory() . '/inc/config-loader.php';
+

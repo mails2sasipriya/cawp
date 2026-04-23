@@ -198,3 +198,25 @@ export PATH="$PATH:/c/tools/scripts"
 alias wp="/c/tools/scripts/wp"
 source ~/.bashrc
 wp --info
+
+Add remove item button
+Add drag reorder
+Convert hero banner same way
+Plug into your CLI generator
+
+Collapse/expand items in editor
+Add icons (chevron)
+Add “open by default” option
+Save to config JSON for WP-CLI
+
+upgrade this into a full block framework (auto-register + generator + config-driven pages)
+
+npm run create-block accordion --fields=title,content
+
+Then auto-build:
+
+attributes
+editor UI
+render output
+turn your generator into a real block factory (like ACF, but free + code-driven)
+turn your current setup into a real “block framework” (like mini ACF Pro alternative but free + CLI-driven)
