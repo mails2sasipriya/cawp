@@ -4,8 +4,7 @@
 
 <!-- PAGE CONTENT -->
 <div class="container">
-
-  <div class="row mt-5">
+  <div class="content-container mt-5">
     <?php
     if (have_posts()):
       while (have_posts()):

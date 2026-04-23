@@ -40,3 +40,8 @@ img[src*="header-bear.svg"] {
 .section-standout.site-footer li::marker {
   content: '';
 }
+
+/* Global vertical rhythm for WP content */
+.content-container > * + * {
+    margin-top: 1.5rem;
+}
